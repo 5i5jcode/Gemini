@@ -96,7 +96,7 @@ public class Gemini {
     /**            PRIVATE METHOD          **/
     /****************************************/
     private File innerCurrentFolder() {
-        return new File(getClass().getResource("/").getFile());
+        return new File(getClass().getResource("../").getPath()).getParentFile();
     }
 
     private Injector buildInjector(List<Module> modules) {

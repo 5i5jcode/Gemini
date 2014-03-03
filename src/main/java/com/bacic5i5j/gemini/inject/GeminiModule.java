@@ -24,9 +24,9 @@ public class GeminiModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(String.class).annotatedWith(Names.named("template.path")).
-                toInstance("/Users/ray/workspaces/mobile-bss/webapps/WEB-INF/pages/0.1");
+                toInstance(gemini.currentFolder() + "pages/");
         bind(String.class).annotatedWith(Names.named("log.path")).
-                toInstance("/Users/ray/workspaces/mobile-bss/logs/gemini.log");
+                toInstance(gemini.currentFolder() + "logs/gemini.log");
     }
 
     @Provides
