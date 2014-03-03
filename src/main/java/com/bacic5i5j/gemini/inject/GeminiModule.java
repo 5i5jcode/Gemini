@@ -8,12 +8,12 @@ import com.bacic5i5j.gemini.Gemini;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.inject.name.Names;
 
 /**
  * @(#)GeminiModule.java 1.0 27/02/2014
  */
 public class GeminiModule extends AbstractModule {
+
     private final Gemini gemini;
 
     public GeminiModule(Gemini gemini) {
