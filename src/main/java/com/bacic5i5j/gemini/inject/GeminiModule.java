@@ -14,7 +14,6 @@ import com.google.inject.name.Names;
  * @(#)GeminiModule.java 1.0 27/02/2014
  */
 public class GeminiModule extends AbstractModule {
-
     private final Gemini gemini;
 
     public GeminiModule(Gemini gemini) {
@@ -23,10 +22,6 @@ public class GeminiModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(String.class).annotatedWith(Names.named("template.path")).
-                toInstance(gemini.currentFolder() + "pages/");
-        bind(String.class).annotatedWith(Names.named("log.path")).
-                toInstance(gemini.currentFolder() + "logs/gemini.log");
     }
 
     @Provides

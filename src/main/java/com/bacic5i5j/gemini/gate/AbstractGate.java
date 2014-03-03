@@ -17,20 +17,20 @@ import javax.ws.rs.core.Context;
  */
 public class AbstractGate {
     @Context
-    HttpServletRequest request;
+    protected HttpServletRequest request;
     @Context
-    HttpServletResponse response;
+    protected HttpServletResponse response;
     @Context
-    ServletContext servletContext;
+    protected ServletContext servletContext;
 
-    ViewFactory viewFactory;
-    ContextFactory contextFactory;
+    protected ViewFactory viewFactory;
+    protected ContextFactory contextFactory;
 
-    Logger logger;
+    protected Logger logger;
 
-    final Gemini gemini = Gemini.instance;
+    protected final Gemini gemini = Gemini.instance;
 
-    void init() {
+    protected void init() {
         viewFactory = gemini.getInstance(ViewFactory.class);
         contextFactory = gemini.getInstance(ContextFactory.class);
     }

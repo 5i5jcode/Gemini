@@ -12,7 +12,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -23,17 +22,18 @@ import java.util.List;
 public class Gemini {
     public static final Gemini instance = new Gemini();
 
+    private static final List<Module> modules = Lists.newArrayList();
+
     private Injector injector;
 
-    private File currentFolder;
     private LoggerFactory loggerFactory;
     private Logger logger;
+
 
     private Gemini() {
     }
 
     public void init() {
-        List<Module> modules = Lists.newArrayList();
         modules.add(new GeminiModule(this));
         this.injector = buildInjector(modules);
 
@@ -41,9 +41,10 @@ public class Gemini {
         this.logger = getLogger("Gemini");
 
         logger.info("initializing Gemini...");
-        this.currentFolder = innerCurrentFolder();
+    }
 
-        logger.info("webapp director is: " + currentFolder.getAbsolutePath());
+    public void addModule(Module module) {
+        modules.add(module);
     }
 
     public <T> T getInstance(Class<T> type) {
@@ -83,22 +84,9 @@ public class Gemini {
         return this.logger;
     }
 
-    /**
-     * Classloader所在文件夹
-     *
-     * @return 启动文件夹 classloader
-     */
-    public File currentFolder() {
-        return currentFolder;
-    }
-
     /****************************************/
     /**            PRIVATE METHOD          **/
     /****************************************/
-    private File innerCurrentFolder() {
-        return new File(getClass().getResource("../").getPath()).getParentFile();
-    }
-
     private Injector buildInjector(List<Module> modules) {
         return Guice.createInjector(modules);
     }
