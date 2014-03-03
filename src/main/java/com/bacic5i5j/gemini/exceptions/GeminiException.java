@@ -28,9 +28,6 @@ public class GeminiException extends RuntimeException {
         return new GeminiExceptionBuilder(message, cause);
     }
 
-    private static final long serialVersionUID = 5099827279044223975L;
-
-
     GeminiException() {
         super();
     }
