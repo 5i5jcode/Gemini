@@ -11,6 +11,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -55,7 +56,7 @@ public class HibernateSessionFactory implements SessionContext<Session> {
     }
 
     private void buildSessionFactory(String configFile) {
-        Configuration cfg = new Configuration();
+        Configuration cfg = new AnnotationConfiguration();
         cfg.configure(configFile);
         sessionFactory = cfg.buildSessionFactory();
     }
