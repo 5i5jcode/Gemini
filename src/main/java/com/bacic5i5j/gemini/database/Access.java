@@ -24,7 +24,7 @@ public interface Access<T, PK extends Serializable> {
      * @param engity
      * @return
      */
-    public PK save(T engity);
+    public PK save(T entity);
 
     /**
      * 删除实体对象
