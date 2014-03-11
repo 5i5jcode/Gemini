@@ -4,6 +4,9 @@
  */
 package com.bacic5i5j.gemini.database;
 
+import com.bacic5i5j.gemini.internal.DefaultHibernateAccess;
+import com.google.inject.ImplementedBy;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +14,7 @@ import java.io.Serializable;
  *
  * @(#)Access.java 1.0 10/03/2014
  */
+@ImplementedBy(DefaultHibernateAccess.class)
 public interface Access<T, PK extends Serializable> {
     /**
      * 根据主键获取数据实体
