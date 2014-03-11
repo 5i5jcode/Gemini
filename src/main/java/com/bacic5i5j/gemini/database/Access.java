@@ -17,6 +17,12 @@ import java.io.Serializable;
 @ImplementedBy(DefaultHibernateAccess.class)
 public interface Access<T, PK extends Serializable> {
     /**
+     * 设置此次实体类别
+     * @param persistClass
+     */
+    public void setClass(Class<T> persistClass);
+
+    /**
      * 根据主键获取数据实体
      * @param id
      * @return

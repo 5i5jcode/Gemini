@@ -20,7 +20,10 @@ public class DefaultHibernateAccess<T, PK extends Serializable> implements Acces
 
     private Class<T> persistClass;
 
-    public DefaultHibernateAccess(Class<T> persistClass) {
+    public DefaultHibernateAccess() {}
+
+    @Override
+    public void setClass(Class<T> persistClass) {
         this.persistClass = persistClass;
     }
 
