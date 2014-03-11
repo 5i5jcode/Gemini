@@ -21,7 +21,7 @@ public interface Access<T, PK extends Serializable> {
 
     /**
      * 保存实体到数据库，并返回新增数据的主键对象
-     * @param engity
+     * @param entity
      * @return
      */
     public PK save(T entity);
