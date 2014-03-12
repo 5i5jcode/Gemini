@@ -14,7 +14,6 @@ import java.io.Serializable;
  *
  * @(#)Access.java 1.0 10/03/2014
  */
-@ImplementedBy(DefaultHibernateAccess.class)
 public interface Access<T, PK extends Serializable> {
     /**
      * 设置此次实体类别
