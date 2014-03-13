@@ -9,7 +9,6 @@ import com.bacic5i5j.gemini.logs.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 
 /**
  * 这是一个默认实现的Hibernate会话管理，Gemini默认支持Hibernate
@@ -19,28 +18,24 @@ import org.hibernate.cfg.Configuration;
 public class HibernateSessionFactory implements SessionContext<Session> {
     private final Logger logger = Gemini.instance.getLogger(HibernateSessionFactory.class);
 
-    private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
+    private final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
 
     private SessionFactory sessionFactory;
-    // 此处是硬编码
-    private String configFile = "hibernate.cfg.xml";
 
-    private static final HibernateSessionFactory hsf = new HibernateSessionFactory();
-
-    private HibernateSessionFactory() {
+    public HibernateSessionFactory() {
         logger.info("Hibernate Session Factory init...");
-        buildSessionFactory();
-    }
-
-    public static HibernateSessionFactory getInstance() {
-        return hsf;
+        try {
+            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        logger.info("Hibernate build session factory success.");
     }
 
     @Override
     public Session currentSession() {
         Session session = threadLocal.get();
         if (session == null || !session.isOpen() || !session.isConnected()) {
-            buildSessionFactory();
             session = sessionFactory.openSession();
             threadLocal.set(session);
         }
@@ -55,11 +50,5 @@ public class HibernateSessionFactory implements SessionContext<Session> {
             session.close();
         }
         threadLocal.set(null);
-    }
-
-    private void buildSessionFactory() {
-        Configuration cfg = new AnnotationConfiguration();
-        cfg.configure(configFile);
-        sessionFactory = cfg.buildSessionFactory();
     }
 }

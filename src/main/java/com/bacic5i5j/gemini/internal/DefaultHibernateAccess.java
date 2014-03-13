@@ -4,9 +4,11 @@
  */
 package com.bacic5i5j.gemini.internal;
 
+import com.bacic5i5j.gemini.Gemini;
 import com.bacic5i5j.gemini.database.Access;
 import com.bacic5i5j.gemini.database.HibernateSessionFactory;
-import com.google.inject.Inject;
+import com.bacic5i5j.gemini.database.SessionContext;
+import com.bacic5i5j.gemini.logs.Logger;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -15,12 +17,15 @@ import java.io.Serializable;
  * @(#)DefaultHibernateAccess.java 1.0 10/03/2014
  */
 public class DefaultHibernateAccess<T, PK extends Serializable> implements Access<T, PK> {
-    @Inject
-    private HibernateSessionFactory sessionFactory;
+    protected SessionContext<Session> sessionFactory;
 
+    private final Logger logger = Gemini.instance.getLogger(DefaultHibernateAccess.class);  ;
     private Class<T> persistClass;
 
-    public DefaultHibernateAccess() {}
+    public DefaultHibernateAccess() {
+        logger.info("Default Hibernate Access init ... ");
+        sessionFactory = new HibernateSessionFactory();
+    }
 
     @Override
     public void setClass(Class<T> persistClass) {

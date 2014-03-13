@@ -164,5 +164,11 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.5.6-Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>proxool</groupId>
+            <artifactId>proxool</artifactId>
+            <version>0.8.3</version>
+        </dependency>
     </dependencies>
 </project>
