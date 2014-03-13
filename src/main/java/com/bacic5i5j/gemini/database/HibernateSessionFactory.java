@@ -6,9 +6,6 @@ package com.bacic5i5j.gemini.database;
 
 import com.bacic5i5j.gemini.Gemini;
 import com.bacic5i5j.gemini.logs.Logger;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -19,26 +16,31 @@ import org.hibernate.cfg.Configuration;
  *
  * @(#)HibernateSessionFactory.java 1.0 09/03/2014
  */
-@Singleton
 public class HibernateSessionFactory implements SessionContext<Session> {
     private final Logger logger = Gemini.instance.getLogger(HibernateSessionFactory.class);
 
     private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
 
     private SessionFactory sessionFactory;
-    private String configFile;
+    // 此处是硬编码
+    private String configFile = "hibernate.cfg.xml";
 
-    @Inject
-    public HibernateSessionFactory(@Named("hibernate.configfile") String configFile) {
-        this.configFile = configFile;
-        buildSessionFactory(configFile);
+    private static final HibernateSessionFactory hsf = new HibernateSessionFactory();
+
+    private HibernateSessionFactory() {
+        logger.info("Hibernate Session Factory init...");
+        buildSessionFactory();
+    }
+
+    public static HibernateSessionFactory getInstance() {
+        return hsf;
     }
 
     @Override
     public Session currentSession() {
         Session session = threadLocal.get();
         if (session == null || !session.isOpen() || !session.isConnected()) {
-            buildSessionFactory(this.configFile);
+            buildSessionFactory();
             session = sessionFactory.openSession();
             threadLocal.set(session);
         }
@@ -55,7 +57,7 @@ public class HibernateSessionFactory implements SessionContext<Session> {
         threadLocal.set(null);
     }
 
-    private void buildSessionFactory(String configFile) {
+    private void buildSessionFactory() {
         Configuration cfg = new AnnotationConfiguration();
         cfg.configure(configFile);
         sessionFactory = cfg.buildSessionFactory();
