@@ -33,6 +33,4 @@ dist/gemini-0.1.jar
 
 samples/webapps/WEB-INF/lib/*.jar
 
-*.xml
-
-*.log
+samples/webapps/WEB-INF/classes/*.xml
