@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxool>
+	<alias>mobile</alias>
+	<!--<driver-url>jdbc:mysql://10.10.101.54/db_5i5aj?useUnicode=true&amp;characterEncoding=UTF8</driver-url>-->
+	<driver-url>jdbc:mysql://localhost/test?useUnicode=true&amp;characterEncoding=UTF8</driver-url>
+	<!--<driver-url>jdbc:oracle:thin:@10.10.100.57:1521:oradb57</driver-url>-->
+	<driver-class>com.mysql.jdbc.Driver</driver-class>
+	<driver-properties>
+		<property name="user" value="mobile"/>
+		<property name="password" value="5i5jwireless"/>
+	</driver-properties>
+	<maximum-connection-count>80</maximum-connection-count>
+	<simultaneous-build-throttle>20</simultaneous-build-throttle>
+	<house-keeping-test-sql>select CURRENT_DATE</house-keeping-test-sql>
+	<statistics>1m,15m,1d</statistics>
+</proxool>
