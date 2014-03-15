@@ -32,6 +32,9 @@ public class Gemini {
 
     private Gemini() {}
 
+    /**
+     * 用来进行Gemini的初始化工作
+     */
     public void init() {
         modules.add(new GeminiModule(this));
         this.injector = Guice.createInjector(modules);
