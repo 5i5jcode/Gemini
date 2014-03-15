@@ -22,3 +22,9 @@ Gemini.iml
 .idea/inspectionProfiles/Project_Default.xml
 
 .idea/inspectionProfiles/profiles_settings.xml
+
+.idea/ant.xml
+
+*.class
+
+dist/gemini-0.1.jar
