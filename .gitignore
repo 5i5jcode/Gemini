@@ -30,3 +30,9 @@ Gemini.iml
 dist/gemini-0.1.jar
 
 .idea/artifacts/Gemini_war_exploded.xml
+
+samples/webapps/WEB-INF/lib/*.jar
+
+*.xml
+
+*.log
