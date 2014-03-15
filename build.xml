@@ -14,6 +14,9 @@
         <fileset dir="${lib.dir}">
             <include name="**/*.jar" />
         </fileset>
+        <fileset dir="${target.dist}">
+            <include name="**/*.jar" />
+        </fileset>
     </path>
 
     <target name="clean" description="Clean output dir">
@@ -30,5 +33,44 @@
 
     <target name="jar" depends="compile">
         <jar destfile="${target.dist}/gemini-${proj.version}.jar" basedir="${target.compile.main.dir}"/>
+    </target>
+
+    <!-- follow is webapplication build -->
+    <property name="web.source.dir" value="samples/src/main/java" />
+    <property name="web.resource.dir" value="samples/src/main/resources" />
+    <property name="web.target.compile.dir" value="samples/webapps/WEB-INF/classes" />
+    <property name="web.lib.dir" value="samples/webapps/WEB-INF/lib" />
+
+    <target name="clean-web-class" description="Clean output webapps dir">
+        <delete dir="${web.target.compile.dir}" />
+        <delete dir="${web.lib.dir}" />
+    </target>
+
+    <target name="compile-web-class" description="Compile webapps sources">
+        <mkdir dir="${web.target.compile.dir}" />
+        <javac destdir="${web.target.compile.dir}">
+            <src path="${web.source.dir}" />
+            <classpath refid="master.classpath" />
+        </javac>
+
+        <copy todir="${web.target.compile.dir}">
+            <fileset dir="${web.resource.dir}">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="create webapplication" depends="compile">
+        <copy todir="samples/webapps/WEB-INF/lib">
+            <fileset dir="${lib.dir}">
+                <include name="**/*.jar" />
+            </fileset>
+        </copy>
+        <copy todir="samples/webapps/WEB-INF/lib">
+            <fileset dir="dist">
+                <include name="**/*.jar" />
+            </fileset>
+        </copy>
     </target>
 </project>
