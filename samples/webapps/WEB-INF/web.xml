@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5">
     <filter>
-        <filter-name>BSS</filter-name>
+        <filter-name>SAMPLES</filter-name>
         <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.bacic5i5j.bss.BossApplication</param-value>
+            <param-value>com.bacic5i5j.web.WebApplication</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.servlet.filter.staticContentRegex</param-name>
@@ -18,7 +18,7 @@
     </filter>
 
     <filter-mapping>
-        <filter-name>BSS</filter-name>
+        <filter-name>SAMPLES</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

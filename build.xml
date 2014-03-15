@@ -14,9 +14,6 @@
         <fileset dir="${lib.dir}">
             <include name="**/*.jar" />
         </fileset>
-        <fileset dir="${target.dist}">
-            <include name="**/*.jar" />
-        </fileset>
     </path>
 
     <target name="clean" description="Clean output dir">
@@ -41,27 +38,18 @@
     <property name="web.target.compile.dir" value="samples/webapps/WEB-INF/classes" />
     <property name="web.lib.dir" value="samples/webapps/WEB-INF/lib" />
 
+    <path id="web.classpath">
+        <fileset dir="${web.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
     <target name="clean-web-class" description="Clean output webapps dir">
         <delete dir="${web.target.compile.dir}" />
         <delete dir="${web.lib.dir}" />
     </target>
 
-    <target name="compile-web-class" description="Compile webapps sources">
-        <mkdir dir="${web.target.compile.dir}" />
-        <javac destdir="${web.target.compile.dir}">
-            <src path="${web.source.dir}" />
-            <classpath refid="master.classpath" />
-        </javac>
-
-        <copy todir="${web.target.compile.dir}">
-            <fileset dir="${web.resource.dir}">
-                <include name="**/*.xml" />
-                <include name="**/*.properties" />
-            </fileset>
-        </copy>
-    </target>
-
-    <target name="create webapplication" depends="compile">
+    <target name="copy-lib">
         <copy todir="samples/webapps/WEB-INF/lib">
             <fileset dir="${lib.dir}">
                 <include name="**/*.jar" />
@@ -70,6 +58,21 @@
         <copy todir="samples/webapps/WEB-INF/lib">
             <fileset dir="dist">
                 <include name="**/*.jar" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile-web-class" description="Compile webapps sources" depends="copy-lib">
+        <mkdir dir="${web.target.compile.dir}" />
+        <javac destdir="${web.target.compile.dir}">
+            <src path="${web.source.dir}" />
+            <classpath refid="web.classpath" />
+        </javac>
+
+        <copy todir="${web.target.compile.dir}">
+            <fileset dir="${web.resource.dir}">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
             </fileset>
         </copy>
     </target>

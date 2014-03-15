@@ -32,10 +32,10 @@ public class AbstractGate {
     Gemini gemini = Gemini.instance;
 
     // 数据模型、视图、上下文环境的接口初始化，以及日志的初始化
-    Model model;
-    ViewFactory viewFactory;
-    GeminiContext geminiContext;
-    Logger logger;
+    protected Model model;
+    protected ViewFactory viewFactory;
+    protected GeminiContext geminiContext;
+    protected Logger logger;
 
     public AbstractGate() {
         init();
