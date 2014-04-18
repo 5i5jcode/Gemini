@@ -4,7 +4,7 @@
  */
 package com.bacic5i5j.web.inject;
 
-import com.bacic5i5j.bss.database.SessionContext;
+import com.bacic5i5j.framework.database.SessionContext;
 import com.bacic5i5j.web.database.TestSessionContext;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;

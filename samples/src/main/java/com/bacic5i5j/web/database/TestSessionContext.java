@@ -4,7 +4,7 @@
  */
 package com.bacic5i5j.web.database;
 
-import com.bacic5i5j.bss.database.AbstractSessionContext;
+import com.bacic5i5j.framework.database.AbstractSessionContext;
 
 /**
  * @(#)TestSessionContext.java 1.0 15/03/2014

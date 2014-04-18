@@ -4,8 +4,8 @@
  */
 package com.bacic5i5j.web.database;
 
-import com.bacic5i5j.bss.database.HibernateAccess;
-import com.bacic5i5j.bss.database.SessionContext;
+import com.bacic5i5j.framework.database.HibernateAccess;
+import com.bacic5i5j.framework.database.SessionContext;
 import com.bacic5i5j.web.entity.User;
 import com.bacic5i5j.web.inject.MySQLDB;
 import com.google.inject.Inject;

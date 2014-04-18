@@ -4,8 +4,8 @@
  */
 package com.bacic5i5j.web.gate;
 
-import com.bacic5i5j.bss.Gemini;
-import com.bacic5i5j.bss.gate.AbstractGate;
+import com.bacic5i5j.framework.Gemini;
+import com.bacic5i5j.framework.gate.AbstractGate;
 import com.bacic5i5j.web.database.TestAccess;
 
 import javax.ws.rs.GET;

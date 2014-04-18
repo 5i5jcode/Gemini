@@ -4,7 +4,7 @@
  */
 package com.bacic5i5j.web;
 
-import com.bacic5i5j.bss.Gemini;
+import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.web.inject.SampleModule;
 import org.glassfish.jersey.server.ResourceConfig;
 
