@@ -2,15 +2,15 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.gate;
+package com.bacic5i5j.framework.gate;
 
 
-import com.bacic5i5j.bss.Gemini;
-import com.bacic5i5j.bss.GeminiContext;
-import com.bacic5i5j.bss.Model;
-import com.bacic5i5j.bss.core.ContextFactory;
-import com.bacic5i5j.bss.logs.LoggerFactory;
-import com.bacic5i5j.bss.view.ViewFactory;
+import com.bacic5i5j.framework.Gemini;
+import com.bacic5i5j.framework.GeminiContext;
+import com.bacic5i5j.framework.Model;
+import com.bacic5i5j.framework.core.ContextFactory;
+import com.bacic5i5j.framework.logs.LoggerFactory;
+import com.bacic5i5j.framework.view.ViewFactory;
 import org.slf4j.Logger;
 
 import javax.servlet.ServletContext;

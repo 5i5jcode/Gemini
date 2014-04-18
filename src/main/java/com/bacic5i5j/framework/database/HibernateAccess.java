@@ -2,9 +2,9 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.database;
+package com.bacic5i5j.framework.database;
 
-import com.bacic5i5j.bss.Gemini;
+import com.bacic5i5j.framework.Gemini;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 

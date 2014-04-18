@@ -2,9 +2,9 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.core;
+package com.bacic5i5j.framework.core;
 
-import com.bacic5i5j.bss.Model;
+import com.bacic5i5j.framework.Model;
 import com.google.common.collect.Maps;
 
 import java.util.Map;

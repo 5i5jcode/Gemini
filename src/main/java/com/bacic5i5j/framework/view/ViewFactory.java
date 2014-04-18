@@ -2,9 +2,9 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.view;
+package com.bacic5i5j.framework.view;
 
-import com.bacic5i5j.bss.GeminiContext;
+import com.bacic5i5j.framework.GeminiContext;
 
 /**
  * 视图渲染，Gemini默认提供的视图是Velocity视图

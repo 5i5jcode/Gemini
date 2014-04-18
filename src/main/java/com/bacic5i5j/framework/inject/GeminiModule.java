@@ -2,19 +2,19 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.inject;
+package com.bacic5i5j.framework.inject;
 
-import com.bacic5i5j.bss.Gemini;
-import com.bacic5i5j.bss.Model;
-import com.bacic5i5j.bss.core.ContextFactory;
-import com.bacic5i5j.bss.core.DefaultContextFactory;
-import com.bacic5i5j.bss.core.DefaultModel;
-import com.bacic5i5j.bss.logs.DefaultLoggerConfigue;
-import com.bacic5i5j.bss.logs.DefaultLoggerFactory;
-import com.bacic5i5j.bss.logs.LoggerConfigure;
-import com.bacic5i5j.bss.logs.LoggerFactory;
-import com.bacic5i5j.bss.view.VelocityViewFactory;
-import com.bacic5i5j.bss.view.ViewFactory;
+import com.bacic5i5j.framework.Gemini;
+import com.bacic5i5j.framework.Model;
+import com.bacic5i5j.framework.core.ContextFactory;
+import com.bacic5i5j.framework.core.DefaultContextFactory;
+import com.bacic5i5j.framework.core.DefaultModel;
+import com.bacic5i5j.framework.logs.DefaultLoggerConfigue;
+import com.bacic5i5j.framework.logs.DefaultLoggerFactory;
+import com.bacic5i5j.framework.logs.LoggerConfigure;
+import com.bacic5i5j.framework.logs.LoggerFactory;
+import com.bacic5i5j.framework.view.VelocityViewFactory;
+import com.bacic5i5j.framework.view.ViewFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;

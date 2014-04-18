@@ -4,7 +4,7 @@
  */
 package com.bacic5i5j.test.database;
 
-import com.bacic5i5j.bss.Gemini;
+import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.test.inject.TestModule;
 import junit.framework.Assert;
 import org.junit.After;

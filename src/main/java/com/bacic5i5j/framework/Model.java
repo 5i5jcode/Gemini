@@ -2,7 +2,7 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss;
+package com.bacic5i5j.framework;
 
 import java.util.Map;
 

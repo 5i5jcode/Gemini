@@ -2,10 +2,10 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss;
+package com.bacic5i5j.framework;
 
-import com.bacic5i5j.bss.inject.GeminiModule;
-import com.bacic5i5j.bss.logs.LoggerFactory;
+import com.bacic5i5j.framework.inject.GeminiModule;
+import com.bacic5i5j.framework.logs.LoggerFactory;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

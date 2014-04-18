@@ -2,7 +2,7 @@
  * Copyright (c) 2014, 5i5j.com. All rights reserved.
  * 5i5j.com. Use is subject to license terms.
  */
-package com.bacic5i5j.bss.database;
+package com.bacic5i5j.framework.database;
 
 /**
  * 用于数据库访问时获取当前线程所持有的数据库连接
