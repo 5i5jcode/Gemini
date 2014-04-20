@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxool>
 	<alias>mobile</alias>
-	<!--<driver-url>jdbc:mysql://10.10.101.54/db_5i5aj?useUnicode=true&amp;characterEncoding=UTF8</driver-url>-->
 	<driver-url>jdbc:mysql://localhost/test?useUnicode=true&amp;characterEncoding=UTF8</driver-url>
-	<!--<driver-url>jdbc:oracle:thin:@10.10.100.57:1521:oradb57</driver-url>-->
 	<driver-class>com.mysql.jdbc.Driver</driver-class>
 	<driver-properties>
 		<property name="user" value="mobile"/>
