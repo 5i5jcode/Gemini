@@ -4,23 +4,36 @@
  */
 package com.bacic5i5j.framework.view;
 
+import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.framework.GeminiContext;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.runtime.RuntimeInstance;
+import org.apache.velocity.tools.ToolManager;
+import org.apache.velocity.tools.config.EasyFactoryConfiguration;
+import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.NumberTool;
+import org.apache.velocity.tools.view.VelocityView;
+import org.slf4j.Logger;
 
 import java.io.StringWriter;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 /**
  * @(#)DefaultViewFactory.java 1.0 13/03/2014
  */
 public class VelocityViewFactory implements ViewFactory {
-    private final RuntimeInstance rtInstance;
+    private final static Logger logger = Gemini.instance.getLogger(VelocityViewFactory.class);
+
+    private final VelocityEngine velocityEngine;
     private final String suffix = ".vm";
+    private final ToolManager toolManager = new ToolManager();
 
     @Inject
     public VelocityViewFactory(@Named("template.path") String templatePath) {
@@ -40,22 +53,35 @@ public class VelocityViewFactory implements ViewFactory {
         ps.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
         ps.setProperty("runtime.log.logsystem.log4j.category", "velocity_log");
 
-        rtInstance = new RuntimeInstance();
+        velocityEngine = new VelocityEngine();
 
         try {
-            rtInstance.init(ps);
+            velocityEngine.init(ps);
+            EasyFactoryConfiguration config = new EasyFactoryConfiguration();
+            config.toolbox("application").tool("number", NumberTool.class).tool("date", DateTool.class);
+            toolManager.configure(config);
+            toolManager.setVelocityEngine(velocityEngine);
         } catch (Exception e) {
-
+            logger.error(e.getMessage() + " : " + e.getCause());
         }
     }
 
     @Override
     public String render(GeminiContext context, String viewName) {
         String result = "";
-        Template template = rtInstance.getTemplate(viewName + suffix);
+        Template template = velocityEngine.getTemplate(viewName + suffix);
 
         //init context
-        Context ctx = new VelocityContext(context.getModel().getModel());
+        //Context ctx = new VelocityContext(context.getModel().getModel());
+        Context ctx = toolManager.createContext();
+        Map maps = context.getModel().getModel();
+        Iterator keys = maps.keySet().iterator();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            Object object = maps.get(key);
+            ctx.put(key, object);
+        }
+
         // render
         StringWriter writer = new StringWriter();
         template.merge(ctx, writer);
