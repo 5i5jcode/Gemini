@@ -23,13 +23,13 @@ import javax.ws.rs.core.Context;
  */
 public class AbstractGate {
     @Context
-    HttpServletRequest request;
+    protected HttpServletRequest request;
     @Context
-    HttpServletResponse response;
+    protected HttpServletResponse response;
     @Context
-    ServletContext servletContext;
+    protected ServletContext servletContext;
 
-    Gemini gemini = Gemini.instance;
+    protected Gemini gemini = Gemini.instance;
 
     // 数据模型、视图、上下文环境的接口初始化，以及日志的初始化
     protected Model model;
