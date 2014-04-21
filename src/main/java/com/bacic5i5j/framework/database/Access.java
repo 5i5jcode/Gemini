@@ -4,6 +4,8 @@
  */
 package com.bacic5i5j.framework.database;
 
+import org.hibernate.criterion.Order;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,12 +15,14 @@ import java.util.List;
 public interface Access<T, PK extends Serializable> {
     /**
      * 设置此次实体类别
+     *
      * @param persistClass
      */
     public void setClass(Class<T> persistClass);
 
     /**
      * 根据主键获取数据实体
+     *
      * @param id
      * @return
      */
@@ -26,6 +30,7 @@ public interface Access<T, PK extends Serializable> {
 
     /**
      * 保存实体到数据库，并返回新增数据的主键对象
+     *
      * @param entity
      * @return
      */
@@ -33,18 +38,21 @@ public interface Access<T, PK extends Serializable> {
 
     /**
      * 删除实体对象
+     *
      * @param entity
      */
     public void delete(T entity);
 
     /**
      * 根据主键删除实体对象，并返回被删除的实体对象
+     *
      * @param id
      */
     public T delete(PK id);
 
     /**
      * 更新实体对象
+     *
      * @param entity
      * @return
      */
@@ -52,15 +60,36 @@ public interface Access<T, PK extends Serializable> {
 
     /**
      * 获取所有实体列表
+     *
      * @return
      */
     public List<T> all();
 
     /**
      * 按分页获取实体列表
+     *
      * @param start
      * @param max
      * @return
      */
     public List<T> page(int start, int max);
+
+    /**
+     * 按分页获取实体列表，提供排序方案
+     *
+     * @param start
+     * @param max
+     * @param orders
+     * @return
+     */
+    public List<T> page(int start, int max, Order[] orders);
+
+
+    /**
+     * 根据计算语句的SQL，来计算记录集的数量
+     *
+     * @param sql
+     * @return
+     */
+    public int count(String sql);
 }

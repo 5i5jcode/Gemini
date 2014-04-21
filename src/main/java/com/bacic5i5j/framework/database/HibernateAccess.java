@@ -5,7 +5,9 @@
 package com.bacic5i5j.framework.database;
 
 import com.bacic5i5j.framework.Gemini;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 
 import java.io.Serializable;
@@ -101,5 +103,27 @@ public class HibernateAccess<T, PK extends Serializable> implements Access<T, PK
         sessionFactory.closeSession();
 
         return list;
+    }
+
+    @Override
+    public List<T> page(int start, int max, Order[] orders) {
+        Session session = sessionFactory.currentSession();
+        Criteria criteria = session.createCriteria(persistClass).setFirstResult(start).setMaxResults(max);
+        for (Order order : orders) {
+            criteria.addOrder(order);
+        }
+        List list = criteria.list();
+        sessionFactory.closeSession();
+
+        return list;
+    }
+
+    @Override
+    public int count(String sql) {
+        Session session = sessionFactory.currentSession();
+        int amount = ((Number) session.createSQLQuery(sql).uniqueResult()).intValue();
+        sessionFactory.closeSession();
+
+        return amount;
     }
 }
