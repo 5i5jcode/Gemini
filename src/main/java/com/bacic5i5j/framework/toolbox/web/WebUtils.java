@@ -5,13 +5,18 @@
 package com.bacic5i5j.framework.toolbox.web;
 
 
+import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.framework.toolbox.crypto.BASE64Coding;
 import com.bacic5i5j.framework.toolbox.crypto.DESCoding;
-import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +30,7 @@ import java.util.Map;
  * 这个模块信息量巨大!
  */
 public class WebUtils {
-	private static Logger log = Logger.getLogger(WebUtils.class);
+	private static Logger log = Gemini.instance.getLogger(WebUtils.class);
 
 	/**
 	 * 获得普通字符串型的参数
@@ -135,7 +140,7 @@ public class WebUtils {
 		try {
 			des = new DESCoding(keys);
 		} catch (Exception e) {
-			log.fatal("gernate verify code occured error: " + e.getMessage());
+			log.error("gernate verify code occured error: " + e.getMessage());
 		}
 
 		assert des != null;
@@ -158,7 +163,7 @@ public class WebUtils {
 			try {
 				des = new DESCoding(keys);
 			} catch (Exception e) {
-				log.fatal("decode verify code occured error: " + e.getMessage());
+				log.error("decode verify code occured error: " + e.getMessage());
 			}
 			assert des != null;
 			byte[] bs2 = des.decode(bs);
@@ -169,4 +174,23 @@ public class WebUtils {
 
 		return code;
 	}
+
+    /**
+     * 将对象转换为json字符串
+     *
+     * @param obj
+     * @return
+     */
+    public static String toJson(Object obj) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = null;
+
+        try {
+            jsonString = objectMapper.writeValueAsString(obj);
+        } catch (IOException e) {
+            log.error("method toJson occured error: " + e.getMessage());
+        }
+
+        return jsonString;
+    }
 }
