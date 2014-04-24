@@ -91,7 +91,7 @@ public class HibernateAccess<T, PK extends Serializable> implements Access<T, PK
     public List<T> all() {
         Session session = sessionFactory.currentSession();
         List list = session.createCriteria(persistClass).list();
-        sessionFactory.currentSession();
+        sessionFactory.closeSession();
 
         return list;
     }

@@ -15,7 +15,7 @@ import org.slf4j.Logger;
  */
 public class AbstractSessionContext implements SessionContext<Session> {
     protected static final Logger logger = Gemini.instance.getLogger("Database connection");
-    protected static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
+    protected ThreadLocal<Session> threadLocal = null;
 
     protected SessionFactory sessionFactory;
 
@@ -25,6 +25,7 @@ public class AbstractSessionContext implements SessionContext<Session> {
         logger.info("Hibernate会话管理生成器初始完成.");
         try {
             sessionFactory = new AnnotationConfiguration().configure(config).buildSessionFactory();
+            threadLocal = new ThreadLocal<Session>();
             success = true;
         } catch (Exception e) {
             logger.error("数据库连接会话初始错误: " + e.getMessage());
