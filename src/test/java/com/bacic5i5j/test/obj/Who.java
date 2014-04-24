@@ -24,7 +24,7 @@ public class Who {
     @Test
     public void testCalendar() {
         Calendar calendar = Calendar.getInstance();
-        String startTime = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1)+ "-" + calendar.get(Calendar.DAY_OF_MONTH) + " 00:00:00";
+        String startTime = calendar.get(Calendar.YEAR) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.DAY_OF_MONTH) + " 00:00:00";
         System.out.println(startTime);
     }
 }
