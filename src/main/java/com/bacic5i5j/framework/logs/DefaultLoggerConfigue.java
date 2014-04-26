@@ -24,7 +24,7 @@ public class DefaultLoggerConfigue implements LoggerConfigure {
 
         Properties properties = new Properties();
 
-        properties.put("log4j.rootLogger", "INFO, file");
+        properties.put("log4j.rootLogger", "DEBUG, file");
         // 这里是一处硬编码
         properties.put("log4j.appender.file.File", logPath);
 
@@ -35,7 +35,7 @@ public class DefaultLoggerConfigue implements LoggerConfigure {
         properties.put("log4j.appender.stdout.layout.ConversionPattern", "%m%n");
         properties.put("log4j.appender.file", "org.apache.log4j.DailyRollingFileAppender");
         properties.put("log4j.appender.file.Append", "true");
-        properties.put("log4j.appender.file.Threshold", "INFO");
+        properties.put("log4j.appender.file.Threshold", "DEBUG");
         properties.put("log4j.appender.file.layout", "org.apache.log4j.PatternLayout");
         properties.put("log4j.appender.file.layout.ConversionPattern", "%d{ABSOLUTE} %5p %c{1}:%L - %m%n");
 
