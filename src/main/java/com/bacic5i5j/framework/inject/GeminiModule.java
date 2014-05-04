@@ -36,7 +36,7 @@ public class GeminiModule extends AbstractModule {
         bind(LoggerConfigure.class).to(DefaultLoggerConfigue.class).in(Singleton.class);
         bind(LoggerFactory.class).to(DefaultLoggerFactory.class).in(Singleton.class);
         bind(String.class).annotatedWith(Names.named("log.path")).
-                toInstance(gemini.currentFolder() + "/logs/gemini.log");
+                toInstance("/var/logs/gemini.log");
 
         // 视图托管
         bind(ViewFactory.class).to(VelocityViewFactory.class).in(Singleton.class);
