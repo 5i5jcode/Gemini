@@ -19,15 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 
 /**
+ * 与jersey框架集成，托管request， response，ServletContext等对象
+ *
  * @(#)AbstractGate.java 1.0 14/03/2014
  */
 public class AbstractGate {
     @Context
-    protected HttpServletRequest request;
+    private HttpServletRequest request;
     @Context
-    protected HttpServletResponse response;
+    private HttpServletResponse response;
     @Context
-    protected ServletContext servletContext;
+    private ServletContext servletContext;
 
     protected Gemini gemini = Gemini.instance;
 

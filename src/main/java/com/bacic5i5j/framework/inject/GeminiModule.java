@@ -18,7 +18,6 @@ import com.bacic5i5j.framework.view.ViewFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.inject.name.Names;
 
 /**
  * @(#)GeminiModule.java 1.0 13/03/2014
@@ -35,13 +34,9 @@ public class GeminiModule extends AbstractModule {
         // 日志托管
         bind(LoggerConfigure.class).to(DefaultLoggerConfigue.class).in(Singleton.class);
         bind(LoggerFactory.class).to(DefaultLoggerFactory.class).in(Singleton.class);
-        bind(String.class).annotatedWith(Names.named("log.path")).
-                toInstance("/var/logs/gemini.log");
 
         // 视图托管
         bind(ViewFactory.class).to(VelocityViewFactory.class).in(Singleton.class);
-        bind(String.class).annotatedWith(Names.named("template.path")).
-                toInstance(gemini.currentFolder() + "/WEB-INF/pages/");
 
         // 环境上下文
         bind(ContextFactory.class).to(DefaultContextFactory.class).in(Singleton.class);

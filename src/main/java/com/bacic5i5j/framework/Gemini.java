@@ -10,9 +10,10 @@ import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -30,12 +31,21 @@ public class Gemini {
     private LoggerFactory loggerFactory;
     private Logger logger;
 
+    private PropertiesConfiguration config;
+
     private Gemini() {}
 
     /**
      * 用来进行Gemini的初始化工作
      */
     public void init() {
+        //
+        try {
+            config = new PropertiesConfiguration("global.properties");
+        } catch (ConfigurationException e) {
+            System.err.println("初始全局配置出现错误，请在class加载路径下放置global.properties文件: " + e.getMessage());
+        }
+
         modules.add(new GeminiModule(this));
         this.injector = Guice.createInjector(modules);
 
@@ -44,7 +54,9 @@ public class Gemini {
 
         this.logger.info("核心初始化已完成！");
 
-        logger.info("用户目录: " + currentFolder());
+        if (config != null) {
+            logger.info("应用主目录: " + config.getString("webapp.dir"));
+        }
     }
 
     public void addModule(Module module) {
@@ -63,7 +75,7 @@ public class Gemini {
         return injector.getInstance(type);
     }
 
-    public File currentFolder() {
-        return new File(getClass().getResource("/").getFile()).getParentFile().getParentFile();
+    public PropertiesConfiguration getConfig() {
+        return config;
     }
 }

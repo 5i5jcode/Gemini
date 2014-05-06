@@ -7,17 +7,14 @@ package com.bacic5i5j.framework.view;
 import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.framework.GeminiContext;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.runtime.RuntimeInstance;
 import org.apache.velocity.tools.ToolManager;
 import org.apache.velocity.tools.config.EasyFactoryConfiguration;
 import org.apache.velocity.tools.generic.DateTool;
 import org.apache.velocity.tools.generic.NumberTool;
-import org.apache.velocity.tools.view.VelocityView;
 import org.slf4j.Logger;
 
 import java.io.StringWriter;
@@ -36,7 +33,16 @@ public class VelocityViewFactory implements ViewFactory {
     private final ToolManager toolManager = new ToolManager();
 
     @Inject
-    public VelocityViewFactory(@Named("template.path") String templatePath) {
+    public VelocityViewFactory() {
+        PropertiesConfiguration _config = Gemini.instance.getConfig();
+        String templatePath = "/WEB-INF/pages";
+        if (_config != null) {
+            String _template_path = _config.getString("webapp.template");
+            if (_template_path != null && !"".equals(_template_path.trim())) {
+                templatePath = _template_path;
+            }
+        }
+
         Properties ps = new Properties();
         ps.setProperty("resource.loader", "file");
         ps.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");

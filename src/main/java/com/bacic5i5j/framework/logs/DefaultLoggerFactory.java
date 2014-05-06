@@ -4,9 +4,10 @@
  */
 package com.bacic5i5j.framework.logs;
 
+import com.bacic5i5j.framework.Gemini;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -18,7 +19,16 @@ public class DefaultLoggerFactory implements LoggerFactory {
     Map<String, Logger> loggerMap = Maps.newHashMap();
 
     @Inject
-    public DefaultLoggerFactory(LoggerConfigure loggerConfigure, @Named("log.path") String logPath) {
+    public DefaultLoggerFactory(LoggerConfigure loggerConfigure) {
+        PropertiesConfiguration config = Gemini.instance.getConfig();
+        String logPath = "/var/log/gemini.log";
+        if (config != null) {
+            String _log_path = config.getString("webapp.logs");
+            if (_log_path != null && !"".equals(_log_path.trim())) {
+                logPath = _log_path;
+            }
+        }
+
         loggerConfigure.configure(logPath);
     }
 
