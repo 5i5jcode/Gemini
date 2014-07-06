@@ -30,7 +30,7 @@ public class DefaultLoggerConfigue implements LoggerConfigure {
             logLevel = "DEBUG";
         }
 
-        properties.put("log4j.rootLogger", logLevel + ", file");
+        properties.put("log4j.rootLogger", logLevel + ", stdout, file");
         // 这里是一处硬编码
         properties.put("log4j.appender.file.File", logPath);
 
