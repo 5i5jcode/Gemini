@@ -193,4 +193,23 @@ public class WebUtils {
 
         return jsonString;
     }
+
+    /**
+     * 将json对象转换为对象
+     *
+     * @param json
+     * @param type
+     * @return
+     */
+    public static <T> T fromJson(String json, Class<T> type) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        T obj = null;
+        try {
+            obj = objectMapper.readValue(json, type);
+        } catch (IOException e) {
+            log.error("进行json转换成对象的过程中出现错误: " + e.getMessage());
+        }
+
+        return obj;
+    }
 }
