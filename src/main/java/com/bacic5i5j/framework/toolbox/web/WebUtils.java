@@ -8,8 +8,14 @@ package com.bacic5i5j.framework.toolbox.web;
 import com.bacic5i5j.framework.Gemini;
 import com.bacic5i5j.framework.toolbox.crypto.BASE64Coding;
 import com.bacic5i5j.framework.toolbox.crypto.DESCoding;
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonGenerator;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 
@@ -17,9 +23,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * @(#)WebUtils.java 1.0 04/12/2012
@@ -211,5 +217,66 @@ public class WebUtils {
         }
 
         return obj;
+    }
+
+    /**
+     * 服务器端请求信息
+     *
+     * @param params
+     * @param url
+     * @return
+     */
+    public static String post(Map<String, String> params, String url) {
+        String result = "";
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+
+        List<NameValuePair> nvps = generateURLParams(params);
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+        } catch (UnsupportedEncodingException e) {
+            log.error(e.getMessage() + " : " + e.getCause());
+        }
+
+        CloseableHttpResponse response = null;
+
+        try {
+            response = httpClient.execute(httpPost);
+        } catch (IOException e) {
+            log.error(e.getMessage() + " : " + e.getCause());
+        }
+
+        if (response != null) {
+            StatusLine statusLine = response.getStatusLine();
+            log.info("请求的状态码: " + statusLine.getStatusCode());
+            if (statusLine.getStatusCode() == 200 || statusLine.getStatusCode() == 302) {
+                try {
+                    InputStream is = response.getEntity().getContent();
+                    int count = is.available();
+                    byte[] buffer = new byte[count];
+                    is.read(buffer);
+                    result = new String(buffer);
+                } catch (IOException e) {
+                    log.error("在获取响应主体时发生错误: " + e.getMessage());
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    private static List<NameValuePair> generateURLParams(Map<String, String> params) {
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+
+        Iterator<String> keys = params.keySet().iterator();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            BasicNameValuePair basicNameValuePair = new BasicNameValuePair(key, params.get(key));
+            nvs.add(basicNameValuePair);
+        }
+
+        return nvs;
     }
 }
